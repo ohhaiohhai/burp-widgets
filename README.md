@@ -68,6 +68,7 @@ npm install
 npm run dev          # run the demo app (demo/)
 npm run build        # build the library -> dist/
 npm run build:demo   # build the demo    -> demo-dist/
+npm run deploy:pages # build the demo + publish it to the gh-pages branch
 ```
 
 ## License

@@ -26,6 +26,7 @@
     "build": "vite build",
     "build:demo": "vite build --config vite.demo.config.js",
     "preview": "vite preview --config vite.demo.config.js",
+    "deploy:pages": "bash scripts/deploy-pages.sh",
     "prepublishOnly": "vite build"
   },
   "peerDependencies": {
