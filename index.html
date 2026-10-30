@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>burp-widgets — live demo</title>
+    <script>
+      // Apply saved theme + accent before paint to avoid a flash.
+      try {
+        var t = localStorage.getItem('burp-widgets-theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+        var theme = t || document.documentElement.getAttribute('data-theme') || 'dark';
+        var a = localStorage.getItem('burp-widgets-accent-' + theme);
+        if (a) {
+          document.documentElement.style.setProperty('--accent', a);
+          document.documentElement.style.setProperty('--accent-soft', a + '1a');
+        }
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="./assets/index-D53cYAIQ.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DA09ivpr.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
