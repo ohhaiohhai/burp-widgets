@@ -22,6 +22,22 @@
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Warm "paper" light theme — applied when a host sets data-theme="light" on a
+   parent (e.g. <html>). The widgets inherit it automatically. */
+[data-theme="light"] {
+  --bg: #f1ece3;
+  --bg-elev: #faf6ee;
+  --bg-code: #e8dfcd;
+  --border: #d8cfc0;
+  --text: #2c2620;
+  --text-dim: #6f6454;
+  --accent: #2b3a67;
+  --accent-soft: #2b3a6714;
+  --warn: #9a6b12;
+  --warn-soft: #9a6b1216;
+  --code-head: #ddd2bd;
+}
+
 /* ===== Interactive tool widget ===== */
 .tool {
   background: var(--bg-code);

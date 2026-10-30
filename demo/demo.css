@@ -1,18 +1,89 @@
-/* Demo-only page layout + modal chrome. The widget styles themselves come from
-   the package's styles.css; this file just frames them on the demo page. */
+/* Demo-only chrome + page layout. The widget styles come from the package's
+   styles.css; this frames them in a routed app shell with header, nav, accent
+   picker, Matrix canvas, and light/dark theme. */
 * { box-sizing: border-box; }
-html { background: var(--bg); scroll-behavior: smooth; }
+html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
   margin: 0;
-  background: var(--bg);
+  background: transparent; /* let the fixed Matrix canvas (z-index:-1) show through */
   color: var(--text);
   font-family: var(--sans);
   line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; opacity: 0.8; }
 
-.wrap { max-width: 900px; margin: 0 auto; padding: 28px 20px 96px; }
+/* ===== Header ===== */
+.header-stack { position: sticky; top: 0; z-index: 50; }
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+.topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: .3px; white-space: nowrap; }
+.topbar .brand span { color: var(--accent); }
+.topbar nav { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
+.topbar nav a {
+  padding: 5px 11px;
+  border-radius: 7px;
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+}
+.topbar nav a:hover { background: var(--accent-soft); color: var(--text); text-decoration: none; }
+.topbar nav a.active { background: var(--accent); color: var(--on-accent); }
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: grid; place-items: center;
+}
+.icon-btn:hover { color: var(--text); border-color: var(--accent); }
+.icon-btn.active { color: var(--accent); border-color: var(--accent); }
+
+.accent-swatches { display: flex; align-items: center; gap: 5px; }
+.accent-swatch {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+}
+.accent-swatch:hover { transform: scale(1.12); }
+.accent-swatch.active {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--bg-elev), 0 0 0 3px var(--text);
+}
+
+/* ===== Matrix canvas (WebGL background, bursts on copy) ===== */
+.matrix-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  display: none; /* JS flips to block during a burst */
+}
+
+/* ===== Layout ===== */
+.wrap {
+  background: var(--bg);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 96px;
+}
 .page-head { margin-bottom: 24px; }
 .page-head .kicker {
   color: var(--accent);
@@ -47,6 +118,26 @@ body {
 }
 .section p { margin: 8px 0; font-size: 15px; }
 
+/* ===== Home cards ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.card {
+  display: block;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+.card .num { font-family: var(--mono); color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+.card h3 { margin: 6px 0 8px; color: var(--text); font-size: 18px; }
+.card p { margin: 0; color: var(--text-dim); font-size: 14px; }
+
 footer {
   border-top: 1px solid var(--border);
   color: var(--text-dim);
@@ -55,7 +146,7 @@ footer {
   padding: 24px 20px;
 }
 
-/* modal */
+/* ===== View modal ===== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -97,3 +188,8 @@ footer {
   overflow-x: hidden;
 }
 .modal-body .code { margin: 0; }
+
+@media (max-width: 600px) {
+  .topbar { flex-wrap: wrap; }
+  .page-head h1 { font-size: 24px; }
+}
