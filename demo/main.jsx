@@ -1,7 +1,7 @@
-import { StrictMode, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  HashRouter, Routes, Route, Navigate, NavLink, Outlet, useOutletContext,
+  HashRouter, Routes, Route, Navigate, NavLink, Outlet, useLocation, useOutletContext,
 } from 'react-router-dom';
 import {
   CharCodeTool, Md5CookieTool, EncoderTool, EncryptionOracleTool, CsrfPoc,
@@ -59,9 +59,17 @@ const WIDGETS = [
   },
 ];
 
+const SITE = 'burp-widgets';
+
 function Layout() {
   const [modal, setModal] = useState(null);
   const close = () => setModal(null);
+  const { pathname } = useLocation();
+  // Document title per route: "<widget> | burp-widgets" (site name on Home).
+  useEffect(() => {
+    const w = WIDGETS.find((x) => x.path === pathname.replace(/^\//, ''));
+    document.title = w ? `${w.title} | ${SITE}` : SITE;
+  }, [pathname]);
   return (
     <>
       <MatrixRain />
