@@ -1,6 +1,6 @@
 {
   "name": "@ohhaiohhai/burp-widgets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Interactive Burp Suite / BSCP helper widgets (React): String.fromCharCode rebuilder, stay-logged-in cookie forger, encoder playground, and CSRF PoC builder. Runs entirely client-side.",
   "type": "module",
   "license": "MIT",
