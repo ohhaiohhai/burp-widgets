@@ -1,0 +1,6 @@
+# Netlify: build the DEMO (not the library) and serve its output.
+# Without this, Netlify's default `vite build` runs vite.config.js (the library
+# build -> dist/), which has no index.html to serve.
+[build]
+  command = "npm run build:demo"
+  publish = "demo-dist"
