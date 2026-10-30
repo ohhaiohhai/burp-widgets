@@ -1,0 +1,289 @@
+/* ===== @ohhaiohhai/burp-widgets — styles =====
+   Standalone stylesheet for the widgets. Import once:
+     import '@ohhaiohhai/burp-widgets/styles.css';
+   Design tokens live on :root; a host app that already defines these variables
+   can skip this file and the widgets inherit its theme. */
+
+:root {
+  --bg: #0f1419;
+  --bg-elev: #171c24;
+  --bg-code: #0b0e13;
+  --border: #272e3a;
+  --text: #d6dce5;
+  --text-dim: #8b97a7;
+  --accent: #4f7fe8;
+  --accent-soft: #4f7fe81a;
+  --warn: #e0a23a;
+  --warn-soft: #e0a23a1a;
+  --on-accent: #fff;
+  --code-head: #000000;
+  --radius: 10px;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== Interactive tool widget ===== */
+.tool {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 14px 0;
+}
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tool-row > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+  flex: 1;
+  min-width: 160px;
+}
+.tool-row > label input,
+.tool-row > label select {
+  padding: 9px 11px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.tool-row > label input:focus,
+.tool-row > label select:focus { outline: none; border-color: var(--accent); }
+.tool-row label.tool-wide { flex: 1 1 100%; }
+
+.tool textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 9px 11px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tool textarea:focus { outline: none; border-color: var(--accent); }
+
+.tool-out { margin: 14px 0 4px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.tool-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.tool-line .k {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+  width: 52px;
+  flex-shrink: 0;
+}
+.tool-line code {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--accent);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  flex: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+  min-width: 0;
+}
+.mini-copy {
+  appearance: none;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--on-accent);
+  font: 600 12px/1 var(--sans);
+  padding: 6px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.12s ease;
+}
+.mini-copy:hover { opacity: 0.85; }
+.mini-copy.copied { opacity: 0.6; }
+
+.charcode-out {
+  margin: 8px 0 0;
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ===== Chips (examples / presets) ===== */
+.preset-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font: 500 12px/1 var(--sans);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); color: var(--text); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* ===== Encoder playground rows ===== */
+.enc-line { display: grid; gap: 4px; }
+.enc-line + .enc-line { margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+.enc-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.enc-head .k {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+}
+.hv-tag { font-size: 11.5px; opacity: 0.9; }
+.enc-line .hint { margin: 0; }
+
+/* ===== Inline toggle (CSRF PoC field switches) ===== */
+.toggle-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 10px;
+  font-size: 14px;
+  color: var(--text-dim);
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-line input { accent-color: var(--accent); cursor: pointer; }
+
+/* ===== Callout (e.g. CSRF Referrer-Policy note) ===== */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 14.5px;
+}
+.callout strong { color: var(--accent); }
+
+.hint { color: var(--text-dim); font-size: 14.5px; }
+
+code.inline {
+  font-family: var(--mono);
+  background: var(--bg-code);
+  color: var(--accent);
+  padding: 1.5px 6px;
+  border-radius: 5px;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+
+/* ===== Code block (CSRF PoC output) ===== */
+.code { position: relative; margin: 12px 0; }
+.code .code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--code-head);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 6px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.code-actions { display: flex; gap: 6px; }
+.copy-btn {
+  appearance: none;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--on-accent);
+  font: 600 12px/1 var(--sans);
+  padding: 6px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+.copy-btn:hover { opacity: 0.85; }
+.copy-btn.copied { opacity: 0.6; }
+.code pre {
+  margin: 0;
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 0 0 8px 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+.code pre code {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.55;
+  white-space: pre;
+}
+.code pre.code-wrap { overflow-x: hidden; }
+.code pre.code-wrap code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ===== Token inputs above a code block ===== */
+.code-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 12px;
+}
+.code-vars label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+  flex: 1;
+  min-width: 150px;
+}
+.code-vars input {
+  padding: 6px 9px;
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.code-vars input:focus { outline: none; border-color: var(--accent); }
+.code-vars + .code-head { border-top: none; border-radius: 0; }
+.var-label { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }

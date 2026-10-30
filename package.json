@@ -1,0 +1,41 @@
+{
+  "name": "@ohhaiohhai/burp-widgets",
+  "version": "0.1.0",
+  "description": "Interactive Burp Suite / BSCP helper widgets (React): String.fromCharCode rebuilder, stay-logged-in cookie forger, encoder playground, and CSRF PoC builder. Runs entirely client-side.",
+  "type": "module",
+  "license": "MIT",
+  "author": "erics",
+  "homepage": "https://ohhaiohhai.github.io/burp-widgets/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohhaiohhai/burp-widgets.git"
+  },
+  "keywords": ["burp", "bscp", "xss", "csrf", "security", "react", "widgets"],
+  "main": "./dist/burp-widgets.js",
+  "module": "./dist/burp-widgets.js",
+  "exports": {
+    ".": {
+      "import": "./dist/burp-widgets.js"
+    },
+    "./styles.css": "./styles.css"
+  },
+  "sideEffects": ["*.css"],
+  "files": ["dist", "styles.css", "README.md"],
+  "scripts": {
+    "dev": "vite --config vite.demo.config.js",
+    "build": "vite build",
+    "build:demo": "vite build --config vite.demo.config.js",
+    "preview": "vite preview --config vite.demo.config.js",
+    "prepublishOnly": "vite build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^5.4.11"
+  }
+}
