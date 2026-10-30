@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client';
 import {
   HashRouter, Routes, Route, Navigate, NavLink, Outlet, useOutletContext,
 } from 'react-router-dom';
-import { CharCodeTool, Md5CookieTool, EncoderTool, CsrfPoc } from '../src/index.js';
+import {
+  CharCodeTool, Md5CookieTool, EncoderTool, EncryptionOracleTool, CsrfPoc,
+} from '../src/index.js';
 import { EffectsProvider, burstMatrix } from './effects.jsx';
 import MatrixRain from './MatrixRain.jsx';
 import TopBar from './TopBar.jsx';
@@ -40,6 +42,13 @@ const WIDGETS = [
     title: 'Encoder playground',
     blurb: 'Every encoding that smuggles a payload past a filter, each with its Hackvertor equivalent.',
     render: (openModal, burst) => <EncoderTool openModal={openModal} onBurst={burst} />,
+  },
+  {
+    path: 'encryption-oracle',
+    label: 'Oracle',
+    title: 'Encryption-oracle auth bypass',
+    blurb: 'Pad + byte-delete math to forge a stay-logged-in cookie from an encryption oracle.',
+    render: (openModal, burst) => <EncryptionOracleTool openModal={openModal} onBurst={burst} />,
   },
   {
     path: 'csrf',

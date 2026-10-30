@@ -15,6 +15,7 @@
 export { default as CharCodeTool } from './CharCodeTool.jsx';
 export { default as Md5CookieTool } from './Md5CookieTool.jsx';
 export { default as EncoderTool } from './EncoderTool.jsx';
+export { default as EncryptionOracleTool } from './EncryptionOracleTool.jsx';
 export { default as CsrfPoc } from './CsrfPoc.jsx';
 export { default as CodeBlock, VAR_DEFS, renderTokens } from './CodeBlock.jsx';
 export { md5, b64utf8 } from './lib/md5.js';
